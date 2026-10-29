@@ -1,0 +1,21 @@
+# ============================================================================
+# De AnchoredSelf, LLC - Root Apache Configuration & Security Headers
+# ============================================================================
+
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    # Cache local self-hosted WOFF2 fonts and static images
+    <FilesMatch "\.(woff2|svg|jpg|jpeg|png|webp|css|js)$">
+        Header set Cache-Control "public, max-age=604800, immutable"
+    </FilesMatch>
+</IfModule>
+
+# Block public access to SQL schemas, environment overrides, and dot files
+<FilesMatch "^(\.env|schema\.sql|seed\.php)">
+    Require all denied
+</FilesMatch>
+

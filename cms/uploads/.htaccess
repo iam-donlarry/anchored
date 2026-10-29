@@ -1,0 +1,15 @@
+# ============================================================================
+# De AnchoredSelf CMS - Uploads Security Hardening
+# Disables PHP/script execution inside uploaded media directories
+# ============================================================================
+
+Options -Indexes -ExecCGI
+
+<FilesMatch "\.(php|php[0-9]|phtml|pl|py|jsp|asp|htm|html|shtml|sh|cgi|exe|bat|cmd)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
